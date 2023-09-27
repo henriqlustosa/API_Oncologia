@@ -10,7 +10,13 @@ using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -93,17 +99,17 @@ builder.Services.AddAuthentication(x =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseReDoc(c =>
-{
-    c.DocumentTitle = "REDOC Oncologia API";
-    c.RoutePrefix = "";
-});
-
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI();
+//}
+//app.UseReDoc(c =>
+//{
+//    c.DocumentTitle = "REDOC Oncologia API";
+//    c.RoutePrefix = "";
+//});
+app.UseCors("MyPolicy");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 

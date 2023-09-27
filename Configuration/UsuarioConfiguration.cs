@@ -32,6 +32,10 @@ namespace BackendOncologia.Configuration
                 .HasConversion<int>()
                 .IsRequired();
 
+            builder.HasMany(u => u.PreQuimios)
+                          .WithOne(o => o.usuario)
+                          .HasForeignKey(o => o.cod_Usuario)
+                          .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

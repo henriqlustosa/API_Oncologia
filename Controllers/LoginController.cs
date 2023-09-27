@@ -1,6 +1,7 @@
 ﻿using BackendOncologia.DTO;
 using BackendOncologia.Interfaces;
 using BackendOncologia.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -28,6 +29,7 @@ namespace BackendOncologia.Controllers
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
         /// <response code = "400">Bad Request</response>
+    
         [HttpPost]
         public IActionResult Authenticate([FromBody] LoginDTO loginDTO)
         {

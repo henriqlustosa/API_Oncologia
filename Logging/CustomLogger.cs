@@ -4,7 +4,7 @@
     {
         private readonly string _loggerName;
         private readonly CustomLoggerProviderConfiguration _providerConfiguration;
-        private readonly string _logFilePath = @".\BackendOncologia\bin";
+        private readonly string _logFilePath = @".\bin";
         public CustomLogger(string name, CustomLoggerProviderConfiguration config)
         {
             _loggerName = name;
