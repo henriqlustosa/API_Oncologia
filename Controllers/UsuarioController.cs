@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackendOncologia.Controllers
 {
-
+    [ApiController]
+    [Route("usuario")]
     public class UsuarioController : ControllerBase
     {
         private IUsuarioRepository _usuarioRepository;
