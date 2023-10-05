@@ -13,6 +13,7 @@ namespace BackendOncologia.Entities
         public MedicacaoPreQuimio(AddMedicacaoPreQuimioDTO addMedicacaoPreQuimioDTO)
         {
             this.descricao = addMedicacaoPreQuimioDTO.descricao;
+            this.status = "A";
         }
         public MedicacaoPreQuimio(UpdateMedicacaoPreQuimioDTO updateMedicacaoPreQuimioDTO)
         {

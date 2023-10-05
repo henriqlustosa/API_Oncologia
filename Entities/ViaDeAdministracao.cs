@@ -11,6 +11,7 @@ namespace BackendOncologia.Entities
         public ViaDeAdministracao(AddViaDeAdministracaoDTO addViaDeAdministracaoDTO)
         {
             this.descricao = addViaDeAdministracaoDTO.descricao;
+            this.status = "A";
         }
         public ViaDeAdministracao(UpdateViaDeAdministracaoDTO updateViaDeAdministracaoDTO)
         {
