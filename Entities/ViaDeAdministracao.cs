@@ -7,7 +7,7 @@ namespace BackendOncologia.Entities
         public string descricao { get; set; }
         public string status { get; set; }
         public ICollection<PreQuimio> preQuimios { get; set; }
-
+        public ViaDeAdministracao() { }
         public ViaDeAdministracao(AddViaDeAdministracaoDTO addViaDeAdministracaoDTO)
         {
             this.descricao = addViaDeAdministracaoDTO.descricao;
