@@ -17,6 +17,7 @@ namespace BackendOncologia.Entities
         {
             this.descricao = updateViaDeAdministracaoDTO.descricao;
             this.status = updateViaDeAdministracaoDTO.status;
+            Id = updateViaDeAdministracaoDTO.Id;
         }
     }
 }

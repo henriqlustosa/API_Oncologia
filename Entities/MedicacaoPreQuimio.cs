@@ -19,6 +19,7 @@ namespace BackendOncologia.Entities
         {
             this.descricao = updateMedicacaoPreQuimioDTO.descricao;
             this.status = updateMedicacaoPreQuimioDTO.status;
+            Id = updateMedicacaoPreQuimioDTO.Id;
         }
     }
 }

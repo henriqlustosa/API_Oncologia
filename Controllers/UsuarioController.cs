@@ -107,20 +107,20 @@ namespace BackendOncologia.Controllers
         /// <summary>
         /// Editar um usuario especifico
         /// </summary>
-        /// <param name="usuarioDTO"></param>
+        /// <param name="updateUsuarioDTO"></param>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
         /// <response code = "401">Not Authenticated</response>
         /// <response code = "403">Not Authorized</response>
         [Authorize]
-        [Authorize(Roles = Permissoes.Administrador)]
-        [HttpPut]
-        public IActionResult EditarUsuario([FromBody] UpdateUsuarioDTO usuarioDTO)
+        [Authorize(Roles = $"{Permissoes.Administrador}, {Permissoes.Funcionario}")]
+        [HttpPut("{id}")]
+        public IActionResult EditarUsuario(int id,[FromBody] UpdateUsuarioDTO updateUsuarioDTO)
         {
             try
-            {
-                _usuarioRepository.Update(new Usuario(usuarioDTO));
-                var message = $"Usuário {usuarioDTO.Id} atualizado com sucesso!";
+            { 
+                _usuarioRepository.Update(new Usuario(updateUsuarioDTO));
+                var message = $"Usuário {updateUsuarioDTO.Id} atualizado com sucesso!";
                 _logger.LogInformation(message);
                 return Ok(message);
             }

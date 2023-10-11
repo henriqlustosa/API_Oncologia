@@ -99,7 +99,7 @@ namespace BackendOncologia.Controllers
             try
             {
                  _repository.Add(new MedicacaoPreQuimio(addMedicacaoPreQuimioDTO));
-                 var message = $"Medicação pré quimio {addMedicacaoPreQuimioDTO.descricao} criada com sucesso";
+                 var message = $"Medicação pré quimio: {addMedicacaoPreQuimioDTO.descricao} criada com sucesso";
                 _logger.LogInformation(message);
                 return Ok(message);
             } catch (Exception ex)
@@ -127,13 +127,13 @@ namespace BackendOncologia.Controllers
             try
             {
                 _repository.Update(new MedicacaoPreQuimio(updatemedicacaoPreQuimioDTO));
-                var message = $"Usuário {updatemedicacaoPreQuimioDTO.Id} atualizado com sucesso!";
+                var message = $"Medicação da Pré Quimio - {updatemedicacaoPreQuimioDTO.descricao} atualizado com sucesso!";
                 _logger.LogInformation(message);
                 return Ok(message);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método EditarUsuario(){ex.Message}");
+                _logger.LogError(ex, $"Exceção ocorrida no método EditarMedicacaoPreQuimio(){ex.Message}");
                 return BadRequest("Ocorreu um erro ao atualizar o usuário");
             }
 

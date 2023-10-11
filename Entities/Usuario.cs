@@ -24,14 +24,18 @@ namespace BackendOncologia.Entities
             Permissao = addUserDTO.Permissao;
         }
         public Usuario(UpdateUsuarioDTO updateUsuarioDTO) 
-        { 
-            Nome = updateUsuarioDTO.NomeUsuario;
+        {
+            Nome = updateUsuarioDTO.Nome;
+            NomeUsuario = updateUsuarioDTO.NomeUsuario;
+            Senha = updateUsuarioDTO.Senha;
+            Permissao = updateUsuarioDTO.Permissao;
             Id = updateUsuarioDTO.Id;
-        
-        
-        
         }
 
-      
+
+
     }
+
+      
 }
+
