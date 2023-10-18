@@ -1,4 +1,5 @@
-﻿using BackendOncologia.DTO;
+﻿using BackendOncologia.DTO.AddDTO;
+using BackendOncologia.DTO.UpdateDTO;
 
 namespace BackendOncologia.Entities
 {
@@ -7,6 +8,7 @@ namespace BackendOncologia.Entities
         public string descricao { get; set; }
         public string status { get; set; }
         public ICollection<PreQuimio> preQuimios { get; set; }
+        public ICollection<Protocolos> protocolos { get; set; }
         public ViaDeAdministracao() { }
         public ViaDeAdministracao(AddViaDeAdministracaoDTO addViaDeAdministracaoDTO)
         {

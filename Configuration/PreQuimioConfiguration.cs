@@ -78,9 +78,10 @@ namespace BackendOncologia.Configuration
               .HasPrincipalKey(u => u.Id);
 
 
-            builder.Property(u => u.quimio)
-               .HasConversion<int>()
-               .IsRequired();
+            builder.HasMany(u => u.protocolos)
+                          .WithOne(o => o.preQuimio)
+                          .HasForeignKey(o => o.cod_PreQuimio)
+                          .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

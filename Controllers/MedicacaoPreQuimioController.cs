@@ -3,8 +3,9 @@ using Microsoft.Extensions.Logging;
 using BackendOncologia.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using BackendOncologia.Enums;
-using BackendOncologia.DTO;
 using BackendOncologia.Entities;
+using BackendOncologia.DTO.AddDTO;
+using BackendOncologia.DTO.UpdateDTO;
 
 namespace BackendOncologia.Controllers
 {

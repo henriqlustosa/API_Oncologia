@@ -1,4 +1,5 @@
-﻿using BackendOncologia.DTO;
+﻿using BackendOncologia.DTO.AddDTO;
+using BackendOncologia.DTO.UpdateDTO;
 using BackendOncologia.Entities;
 using BackendOncologia.Enums;
 using BackendOncologia.Interfaces;

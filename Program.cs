@@ -63,6 +63,8 @@ builder.Services.AddScoped<IMedicacaoPreQuimioRepository, MedicacaoPreQuimioRepo
 builder.Services.AddScoped<IViaDeAdministracaoRepository, ViaDeAdministracaoRepositoryEF>();
 builder.Services.AddScoped<ITipoPreQuimioRepository, TipoPreQuimioRepositoryEF>();
 builder.Services.AddScoped<IPreQuimioRepository, PreQuimioRepositoryEF>();
+builder.Services.AddScoped<IProtocolosRepository, ProtocolosRepositoryEF>();
+builder.Services.AddScoped<IDescricaoProtocoloRepository, DescricaoProtocoloRepositoryEF>();
 builder.Services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Scoped);
 //builder.Services.AddSingleton<IUsuarioRepository, UsuarioRepositoryDapper>();
 //builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();

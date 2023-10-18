@@ -3,27 +3,26 @@ using BackendOncologia.DTO.UpdateDTO;
 using BackendOncologia.Entities;
 using BackendOncologia.Enums;
 using BackendOncologia.Interfaces;
-using BackendOncologia.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendOncologia.Controllers
 {
     [ApiController]
-    [Route("pre-quimio")]
-    public class PreQuimioController : ControllerBase
+    [Route("descricao-protocolo")]
+    public class DescricaoProtocoloController : ControllerBase
     {
-        private readonly ILogger<PreQuimioController> _logger;
-        private readonly IPreQuimioRepository _repository;
+        private readonly ILogger<DescricaoProtocoloController> _logger;
+        private readonly IDescricaoProtocoloRepository _repository;
 
-        public PreQuimioController(ILogger<PreQuimioController> logger, IPreQuimioRepository preQuimioRepository)
+        public DescricaoProtocoloController(ILogger<DescricaoProtocoloController> logger, IDescricaoProtocoloRepository repository)
         {
             _logger = logger;
-            _repository = preQuimioRepository;
+            _repository = repository;
         }
 
         /// <summary>
-        /// Retorna todos os tipos pre quimio
+        /// Retorna todos os tipos de descrição de protocolo
         /// </summary>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
@@ -31,27 +30,26 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
-        [HttpGet("obter-todos-pre-quimio")]
-        public IActionResult ObterTodosPreQuimio()
+        [HttpGet("obter-todos-descricao-protocolo")]
+        public IActionResult ObterTodosDescricaoProtocolo()
         {
             try
             {
-                var preQuimio = _repository.GetAll();
-                return Ok(preQuimio);
+                var descricaoProtocolo = _repository.GetAll();
+                return Ok(descricaoProtocolo);
 
             }
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método ObterTodosPreQuimio(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao obter os pre quimio");
+                _logger.LogError(ex, $"Exceção ocorrida no método ObterTodosDescricaoProtocolo(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao obter as vias de administração");
 
             }
 
         }
-
         /// <summary>
-        /// Obter um tipo de pre quimio especifico
+        /// Obter uma descricao de protocolo específica
         /// </summary>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
@@ -59,31 +57,30 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
-        [HttpGet("obter-pre-quimio-por-id")]
-        public IActionResult ObterPreQuimioPorId(int id)
+        [HttpGet("obter-descricao-protocolo-por-id")]
+        public IActionResult ObterDescricaoProtocoloPorId(int id)
         {
             try
             {
-                var preQuimio = _repository.GetById(id);
-                return Ok(preQuimio);
+                var descricaoProtocolo = _repository.GetById(id);
+                return Ok(descricaoProtocolo);
 
             }
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método ObterPreQuimioPorId(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao obter o pre quimio");
+                _logger.LogError(ex, $"Exceção ocorrida no método ObterDescricaoProtocoloPorId(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao obter a via de administração");
 
             }
 
         }
 
 
-
         /// <summary>
-        /// Criar um pre quimio
+        /// Criar um no tipo de Pre Quimio
         /// </summary>
-        /// <param name="addPreQuimioDTO"></param>
+        /// <param name="addDescricaoProtocoloDTO"></param>
         /// <returns></returns> 
         /// <response code = "200">Returns Success</response>
         /// <response code = "400">Bad Request</response>
@@ -91,33 +88,31 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = $"{Permissoes.Administrador}, {Permissoes.Funcionario}")]
-
         [HttpPost]
-        public IActionResult CriarPreQuimio([FromBody] AddPreQuimioDTO addPreQuimioDTO)
+        public IActionResult CriarDescricaoProtocolo([FromBody] AddDescricaoProtocoloDTO addDescricaoProtocoloDTO)
         {
             try
             {
-                _repository.Add(new PreQuimio(addPreQuimioDTO));
-                var message = $"Pre quimio {addPreQuimioDTO.cod_TipoPreQuimio} criada com sucesso";
+                _repository.Add(new DescricaoProtocolo(addDescricaoProtocoloDTO));
+                var message = $"Descricao de Protocolo {addDescricaoProtocoloDTO.descricao} criado com sucesso";
                 _logger.LogInformation(message);
                 return Ok(message);
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método CriarPreQuimio(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao criar o tipo de via de administração");
+                _logger.LogError(ex, $"Exceção ocorrida no método CriarDescricaoProtocolo(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao criar a descrição de protocolo");
 
             }
 
 
         }
 
-
         /// <summary>
-        /// Editar um pre quimio especifico
+        /// Editar uma Descricao de Prototocolo específica
         /// </summary>
-        ///<param name="updatePreQuimioDTO"></param>
+        ///<param name="updateDescricaoProtocoloDTO"></param>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
         /// <response code = "401">Not Authenticated</response>
@@ -125,26 +120,25 @@ namespace BackendOncologia.Controllers
         [Authorize]
         [Authorize(Roles = $"{Permissoes.Administrador}, {Permissoes.Funcionario}")]
         [HttpPut("{id}")]
-        public IActionResult EditarPreQuimio(int id, [FromBody] UpdatePreQuimioDTO updatePreQuimioDTO)
+        public IActionResult EditarDescricaoProtocolo(int id, [FromBody] UpdateDescricaoProtocoloDTO updateDescricaoProtocoloDTO)
         {
             try
             {
-                _repository.Update(new PreQuimio(updatePreQuimioDTO));
-                var message = $"Pre quimio com o número {updatePreQuimioDTO.Id} atualizado com sucesso!";
+                _repository.Update(new DescricaoProtocolo(updateDescricaoProtocoloDTO));
+                var message = $"Descricao de Protocolo {updateDescricaoProtocoloDTO.descricao} atualizado com sucesso!";
                 _logger.LogInformation(message);
                 return Ok(message);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método EditarPreQuimio(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao atualizar o usuário");
+                _logger.LogError(ex, $"Exceção ocorrida no método EditarDescricaoProtocolo(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao atualizar a descricao de protocolo");
             }
 
         }
 
-
         /// <summary>
-        /// Remover um pre quimio especifico
+        /// Remover uma Descricao de Protocolo específica
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -154,7 +148,7 @@ namespace BackendOncologia.Controllers
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
         [HttpDelete("{id}")]
-        public IActionResult RemoverPreQuimio(int id)
+        public IActionResult RemoverDescricaoProtocoloDTO(int id)
         {
             try
             {
@@ -167,9 +161,10 @@ namespace BackendOncologia.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método RemoverPreQuimioo(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao remover o usuário");
+                _logger.LogError(ex, $"Exceção ocorrida no método RemoverDescricaoProtocoloDTO(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao remover uma descricao de protocolo");
             }
         }
+
     }
 }

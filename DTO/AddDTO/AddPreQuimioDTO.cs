@@ -1,8 +1,10 @@
-﻿namespace BackendOncologia.DTO
+﻿using BackendOncologia.Entities;
+using BackendOncologia.Enums;
+
+namespace BackendOncologia.DTO.AddDTO
 {
-    public class UpdatePreQuimioDTO
+    public class AddPreQuimioDTO
     {
-        public int Id { get; set; }
         public int cod_TipoPreQuimio { get; set; }
         public int cod_Medicacao { get; set; }
         public int cod_Quimio { get; set; }

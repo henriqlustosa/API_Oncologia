@@ -1,6 +1,6 @@
 ﻿using BackendOncologia.Enums;
 
-namespace BackendOncologia.DTO
+namespace BackendOncologia.DTO.UpdateDTO
 {
     public class UpdateUsuarioDTO
     {

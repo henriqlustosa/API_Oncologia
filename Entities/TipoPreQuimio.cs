@@ -1,4 +1,5 @@
-﻿using BackendOncologia.DTO;
+﻿using BackendOncologia.DTO.AddDTO;
+using BackendOncologia.DTO.UpdateDTO;
 
 namespace BackendOncologia.Entities
 {

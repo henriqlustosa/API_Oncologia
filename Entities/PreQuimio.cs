@@ -1,4 +1,5 @@
-﻿using BackendOncologia.DTO;
+﻿using BackendOncologia.DTO.AddDTO;
+using BackendOncologia.DTO.UpdateDTO;
 using BackendOncologia.Enums;
 
 namespace BackendOncologia.Entities
@@ -30,7 +31,7 @@ namespace BackendOncologia.Entities
         public Usuario usuario { get; set; }
         
         public string status {  get; set; }
-
+        public ICollection<Protocolos> protocolos { get; set; }
         public PreQuimio() { }
         public PreQuimio(AddPreQuimioDTO addTipoQuimioDTO)
         {

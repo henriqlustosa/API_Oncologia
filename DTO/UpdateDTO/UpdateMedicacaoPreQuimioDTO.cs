@@ -1,8 +1,7 @@
-﻿namespace BackendOncologia.DTO
+﻿namespace BackendOncologia.DTO.UpdateDTO
 {
-    public class UpdateTipoPreQuimioDTO
+    public class UpdateMedicacaoPreQuimioDTO
     {
-
         public string descricao { get; set; }
         public string status { get; set; }
 

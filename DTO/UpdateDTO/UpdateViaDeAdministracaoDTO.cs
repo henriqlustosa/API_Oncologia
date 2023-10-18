@@ -1,4 +1,4 @@
-﻿namespace BackendOncologia.DTO
+﻿namespace BackendOncologia.DTO.UpdateDTO
 {
     public class UpdateViaDeAdministracaoDTO
     {

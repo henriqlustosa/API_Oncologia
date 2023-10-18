@@ -19,7 +19,9 @@ namespace BackendOncologia.Repository
         public DbSet<ViaDeAdministracao> ViaDeAdministracao { get; set; }
         public DbSet<TipoPreQuimio> TipoPreQuimio { get; set; }
         public DbSet<MedicacaoPreQuimio> MedicacaoPreQuimio { get; set; }
-    
+        public DbSet<DescricaoProtocolo> DescricaoProtocolos { get; set; }
+        public DbSet<Protocolos> Protocolos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
