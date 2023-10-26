@@ -8,8 +8,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+//builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy",
@@ -80,7 +84,7 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 }));
 
 var configuration = new ConfigurationBuilder()
-                            .AddEnvironmentVariables()
+                           .AddEnvironmentVariables()
                             .AddJsonFile("appsettings.json")
                             .AddUserSecrets<Program>(true)
                             .Build();
