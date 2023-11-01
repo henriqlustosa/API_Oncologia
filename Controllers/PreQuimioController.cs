@@ -3,27 +3,26 @@ using BackendOncologia.DTO.UpdateDTO;
 using BackendOncologia.Entities;
 using BackendOncologia.Enums;
 using BackendOncologia.Interfaces;
-using BackendOncologia.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendOncologia.Controllers
 {
     [ApiController]
-    [Route("pre-quimio")]
+    [Route("tipo-pre-quimio")]
     public class PreQuimioController : ControllerBase
     {
         private readonly ILogger<PreQuimioController> _logger;
-        private readonly IPreQuimioRepository _repository;
+        private readonly ITipoPreQuimioRepository _repository;
 
-        public PreQuimioController(ILogger<PreQuimioController> logger, IPreQuimioRepository preQuimioRepository)
+        public PreQuimioController(ILogger<PreQuimioController> logger, ITipoPreQuimioRepository repository)
         {
             _logger = logger;
-            _repository = preQuimioRepository;
+            _repository = repository;
         }
 
         /// <summary>
-        /// Retorna todos os tipos pre quimio
+        /// Retorna todos os tipos de pre quimio
         /// </summary>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
@@ -31,27 +30,26 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
-        [HttpGet("obter-todos-pre-quimio")]
-        public IActionResult ObterTodosPreQuimio()
+        [HttpGet("obter-todos-tipos-pre-quimio")]
+        public IActionResult ObterTodosTiposPreQuimio()
         {
             try
             {
-                var preQuimio = _repository.GetAll();
-                return Ok(preQuimio);
+                var tipoPreQuimio = _repository.GetAll();
+                return Ok(tipoPreQuimio);
 
             }
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método ObterTodosPreQuimio(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao obter os pre quimio");
+                _logger.LogError(ex, $"Exceção ocorrida no método ObterTodosTiposPreQuimio(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao obter as vias de administração");
 
             }
 
         }
-
         /// <summary>
-        /// Obter um tipo de pre quimio especifico
+        /// Obter um tipo de via de administração especifica
         /// </summary>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
@@ -59,31 +57,30 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
-        [HttpGet("obter-pre-quimio-por-id")]
-        public IActionResult ObterPreQuimioPorId(int id)
+        [HttpGet("obter-tipo-pre-quimio-por-id")]
+        public IActionResult ObterTipoPreQuimioPorId(int id)
         {
             try
             {
-                var preQuimio = _repository.GetById(id);
-                return Ok(preQuimio);
+                var tipoPreQuimio = _repository.GetById(id);
+                return Ok(tipoPreQuimio);
 
             }
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método ObterPreQuimioPorId(){ex.Message}");
-                return BadRequest("Ocorreu um erro ao obter o pre quimio");
+                _logger.LogError(ex, $"Exceção ocorrida no método ObterTipoPreQuimioPorId(){ex.Message}");
+                return BadRequest("Ocorreu um erro ao obter a via de administração");
 
             }
 
         }
 
 
-
         /// <summary>
-        /// Criar um pre quimio
+        /// Criar um no tipo de Pre Quimio
         /// </summary>
-        /// <param name="addPreQuimioDTO"></param>
+        /// <param name="addTipoPreQuimioDTO"></param>
         /// <returns></returns> 
         /// <response code = "200">Returns Success</response>
         /// <response code = "400">Bad Request</response>
@@ -91,21 +88,20 @@ namespace BackendOncologia.Controllers
         /// <response code = "403">Not Authorized</response>
         [Authorize]
         [Authorize(Roles = $"{Permissoes.Administrador}, {Permissoes.Funcionario}")]
-
         [HttpPost]
-        public IActionResult CriarPreQuimio([FromBody] AddPreQuimioDTO addPreQuimioDTO)
+        public IActionResult CriarTipoPreQuimio([FromBody] AddPreQuimioDTO addTipoPreQuimioDTO)
         {
             try
             {
-                _repository.Add(new PreQuimio(addPreQuimioDTO));
-                var message = $"Pre quimio {addPreQuimioDTO.cod_TipoPreQuimio} criada com sucesso";
+                _repository.Add(new PreQuimio(addTipoPreQuimioDTO));
+                var message = $"Tipo de PreQuimio {addTipoPreQuimioDTO.descricao} criado com sucesso";
                 _logger.LogInformation(message);
                 return Ok(message);
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método CriarPreQuimio(){ex.Message}");
+                _logger.LogError(ex, $"Exceção ocorrida no método CriarTipoPreQuimio(){ex.Message}");
                 return BadRequest("Ocorreu um erro ao criar o tipo de via de administração");
 
             }
@@ -113,11 +109,10 @@ namespace BackendOncologia.Controllers
 
         }
 
-
         /// <summary>
-        /// Editar um pre quimio especifico
+        /// Editar um tipo de  Pre Quimio específico 
         /// </summary>
-        ///<param name="updatePreQuimioDTO"></param>
+        ///<param name="updateTipoPreQuimioDTO"></param>
         /// <returns></returns>
         /// <response code = "200">Returns Success</response>
         /// <response code = "401">Not Authenticated</response>
@@ -125,26 +120,25 @@ namespace BackendOncologia.Controllers
         [Authorize]
         [Authorize(Roles = $"{Permissoes.Administrador}, {Permissoes.Funcionario}")]
         [HttpPut("{id}")]
-        public IActionResult EditarPreQuimio(int id, [FromBody] UpdatePreQuimioDTO updatePreQuimioDTO)
+        public IActionResult EditarTipoPreQumio(int id, [FromBody] UpdatePreQuimioDTO updateTipoPreQuimioDTO)
         {
             try
             {
-                _repository.Update(new PreQuimio(updatePreQuimioDTO));
-                var message = $"Pre quimio com o número {updatePreQuimioDTO.Id} atualizado com sucesso!";
+                _repository.Update(new PreQuimio(updateTipoPreQuimioDTO));
+                var message = $"Tipo Pre Quimio {updateTipoPreQuimioDTO.Id} atualizado com sucesso!";
                 _logger.LogInformation(message);
                 return Ok(message);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método EditarPreQuimio(){ex.Message}");
+                _logger.LogError(ex, $"Exceção ocorrida no método EditarTipoPreQumio(){ex.Message}");
                 return BadRequest("Ocorreu um erro ao atualizar o usuário");
             }
 
         }
 
-
         /// <summary>
-        /// Remover um pre quimio especifico
+        /// Remover um tipo  de Pre Quimio especifico
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -154,7 +148,7 @@ namespace BackendOncologia.Controllers
         [Authorize]
         [Authorize(Roles = Permissoes.Administrador)]
         [HttpDelete("{id}")]
-        public IActionResult RemoverPreQuimio(int id)
+        public IActionResult RemoverTipoPreQuimioDTO(int id)
         {
             try
             {
@@ -167,9 +161,10 @@ namespace BackendOncologia.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exceção ocorrida no método RemoverPreQuimioo(){ex.Message}");
+                _logger.LogError(ex, $"Exceção ocorrida no método RemoverTipoPreQuimioDTO(){ex.Message}");
                 return BadRequest("Ocorreu um erro ao remover o usuário");
             }
         }
+
     }
 }

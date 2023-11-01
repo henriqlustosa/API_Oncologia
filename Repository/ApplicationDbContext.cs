@@ -14,10 +14,10 @@ namespace BackendOncologia.Repository
         }
 
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<PreQuimio> PreQuimio { get; set; }
+        public DbSet<MedicacaoPreQuimioDetalhe> PreQuimio { get; set; }
 
         public DbSet<ViaDeAdministracao> ViaDeAdministracao { get; set; }
-        public DbSet<TipoPreQuimio> TipoPreQuimio { get; set; }
+        public DbSet<PreQuimio> TipoPreQuimio { get; set; }
         public DbSet<MedicacaoPreQuimio> MedicacaoPreQuimio { get; set; }
         public DbSet<DescricaoProtocolo> DescricaoProtocolos { get; set; }
         public DbSet<Protocolos> Protocolos { get; set; }

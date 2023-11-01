@@ -13,7 +13,7 @@ namespace BackendOncologia.Entities
         public string Senha { get; set;}
         public TipoPermissao Permissao { get; set;}
 
-        public ICollection<PreQuimio> PreQuimios { get; set; }
+        public ICollection<MedicacaoPreQuimioDetalhe> medicacaoPreQuimioDetalhe { get; set; }
         public ICollection<Protocolos> protocolos { get; set; }
 
         public Usuario() { }

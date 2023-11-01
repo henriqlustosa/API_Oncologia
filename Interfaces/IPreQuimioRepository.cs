@@ -2,7 +2,7 @@
 
 namespace BackendOncologia.Interfaces
 {
-    public interface IPreQuimioRepository : IRepository<PreQuimio>
+    public interface IPreQuimioRepository : IRepository<MedicacaoPreQuimioDetalhe>
     {
     }
 }

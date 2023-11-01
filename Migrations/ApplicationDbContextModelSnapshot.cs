@@ -85,7 +85,7 @@ namespace BackendOncologia.Migrations
                     b.ToTable("MedicacaoPreQuimio", (string)null);
                 });
 
-            modelBuilder.Entity("BackendOncologia.Entities.PreQuimio", b =>
+            modelBuilder.Entity("BackendOncologia.Entities.MedicacaoPreQuimioDetalhe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,10 +96,10 @@ namespace BackendOncologia.Migrations
                     b.Property<int>("cod_Medicacao")
                         .HasColumnType("INT");
 
-                    b.Property<int>("cod_Quimio")
+                    b.Property<int>("cod_PreQuimio")
                         .HasColumnType("INT");
 
-                    b.Property<int>("cod_TipoPreQuimio")
+                    b.Property<int>("cod_Quimio")
                         .HasColumnType("INT");
 
                     b.Property<int>("cod_Usuario")
@@ -140,9 +140,30 @@ namespace BackendOncologia.Migrations
 
                     b.HasIndex("cod_Medicacao");
 
-                    b.HasIndex("cod_TipoPreQuimio");
+                    b.HasIndex("cod_PreQuimio");
 
                     b.HasIndex("cod_Usuario");
+
+                    b.ToTable("MedicacaoPreQuimioDetalhe", (string)null);
+                });
+
+            modelBuilder.Entity("BackendOncologia.Entities.PreQuimio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("descricao")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("CHAR(1)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("PreQuimio", (string)null);
                 });
@@ -214,27 +235,6 @@ namespace BackendOncologia.Migrations
                     b.ToTable("Protocolos", (string)null);
                 });
 
-            modelBuilder.Entity("BackendOncologia.Entities.TipoPreQuimio", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INT");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("descricao")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(50)");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("CHAR(1)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoPreQuimio", (string)null);
-                });
-
             modelBuilder.Entity("BackendOncologia.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -284,7 +284,7 @@ namespace BackendOncologia.Migrations
                     b.ToTable("ViaDeAdministracao", (string)null);
                 });
 
-            modelBuilder.Entity("BackendOncologia.Entities.PreQuimio", b =>
+            modelBuilder.Entity("BackendOncologia.Entities.MedicacaoPreQuimioDetalhe", b =>
                 {
                     b.HasOne("BackendOncologia.Entities.MedicacaoPreQuimio", "medicacao")
                         .WithMany("preQuimios")
@@ -292,27 +292,27 @@ namespace BackendOncologia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BackendOncologia.Entities.TipoPreQuimio", "tipoPreQuimio")
-                        .WithMany("preQuimios")
-                        .HasForeignKey("cod_TipoPreQuimio")
+                    b.HasOne("BackendOncologia.Entities.PreQuimio", "preQuimio")
+                        .WithMany("medicacaoPreQuimioDetalhe")
+                        .HasForeignKey("cod_PreQuimio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BackendOncologia.Entities.Usuario", "usuario")
-                        .WithMany("PreQuimios")
+                        .WithMany("medicacaoPreQuimioDetalhe")
                         .HasForeignKey("cod_Usuario")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BackendOncologia.Entities.ViaDeAdministracao", "viaDeAdministracao")
-                        .WithMany("preQuimios")
+                        .WithMany("medicacaoPreQuimioDetalhe")
                         .HasForeignKey("cod_Usuario")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("medicacao");
 
-                    b.Navigation("tipoPreQuimio");
+                    b.Navigation("preQuimio");
 
                     b.Navigation("usuario");
 
@@ -379,24 +379,21 @@ namespace BackendOncologia.Migrations
 
             modelBuilder.Entity("BackendOncologia.Entities.PreQuimio", b =>
                 {
-                    b.Navigation("protocolos");
-                });
+                    b.Navigation("medicacaoPreQuimioDetalhe");
 
-            modelBuilder.Entity("BackendOncologia.Entities.TipoPreQuimio", b =>
-                {
-                    b.Navigation("preQuimios");
+                    b.Navigation("protocolos");
                 });
 
             modelBuilder.Entity("BackendOncologia.Entities.Usuario", b =>
                 {
-                    b.Navigation("PreQuimios");
+                    b.Navigation("medicacaoPreQuimioDetalhe");
 
                     b.Navigation("protocolos");
                 });
 
             modelBuilder.Entity("BackendOncologia.Entities.ViaDeAdministracao", b =>
                 {
-                    b.Navigation("preQuimios");
+                    b.Navigation("medicacaoPreQuimioDetalhe");
 
                     b.Navigation("protocolos");
                 });

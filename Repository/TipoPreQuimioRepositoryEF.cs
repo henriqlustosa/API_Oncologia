@@ -3,7 +3,7 @@ using BackendOncologia.Interfaces;
 
 namespace BackendOncologia.Repository
 {
-    public class TipoPreQuimioRepositoryEF : EFRepository<TipoPreQuimio>, ITipoPreQuimioRepository
+    public class TipoPreQuimioRepositoryEF : EFRepository<PreQuimio>, ITipoPreQuimioRepository
     {
         public TipoPreQuimioRepositoryEF(ApplicationDbContext context) : base(context)
         {

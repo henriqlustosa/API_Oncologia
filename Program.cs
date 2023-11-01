@@ -84,9 +84,9 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 }));
 
 var configuration = new ConfigurationBuilder()
-                           .AddEnvironmentVariables()
+                          // .AddEnvironmentVariables()
                             .AddJsonFile("appsettings.json")
-                            .AddUserSecrets<Program>(true)
+                          // .AddUserSecrets<Program>(true)
                             .Build();
 
 var key = Encoding.ASCII.GetBytes(configuration.GetValue<string>("Secret"));

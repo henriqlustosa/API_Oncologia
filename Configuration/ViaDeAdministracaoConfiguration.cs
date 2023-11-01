@@ -25,7 +25,7 @@ namespace BackendOncologia.Configuration
           
 
           
-            builder.HasMany(u => u.preQuimios)
+            builder.HasMany(u => u.medicacaoPreQuimioDetalhe)
                           .WithOne(o => o.viaDeAdministracao)
                           .HasForeignKey(o => o.cod_Usuario)
                           .OnDelete(DeleteBehavior.NoAction);
