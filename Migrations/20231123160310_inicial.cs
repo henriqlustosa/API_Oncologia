@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BackendOncologia.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,10 +29,10 @@ namespace BackendOncologia.Migrations
                 name: "Medicacao",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INT", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    descricao = table.Column<string>(type: "VARCHAR(50)", nullable: false),
+                    status = table.Column<string>(type: "CHAR(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,6 +65,20 @@ namespace BackendOncologia.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PreQuimio", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quimio",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    descricao = table.Column<string>(type: "VARCHAR(50)", nullable: false),
+                    status = table.Column<string>(type: "CHAR(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quimio", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,10 +121,9 @@ namespace BackendOncologia.Migrations
                     codMedicacao = table.Column<int>(name: "cod_Medicacao", type: "INT", nullable: false),
                     codQuimio = table.Column<int>(name: "cod_Quimio", type: "INT", nullable: false),
                     codViaDeAdministracao = table.Column<int>(name: "cod_ViaDeAdministracao", type: "INT", nullable: false),
-                    codUsuario = table.Column<int>(name: "cod_Usuario", type: "INT", nullable: false),
+                    nomeUsuario = table.Column<string>(name: "nome_Usuario", type: "VARCHAR(50)", nullable: false),
                     quantidade = table.Column<int>(type: "INT", nullable: false),
                     unidadeQuantidade = table.Column<string>(type: "VARCHAR(10)", nullable: false),
-                    quimio = table.Column<int>(type: "int", nullable: false),
                     diluicao = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     tempoDeInfusao = table.Column<int>(type: "INT", nullable: false),
                     unidadeTempoDeInfusao = table.Column<string>(type: "VARCHAR(10)", nullable: false),
@@ -133,13 +146,13 @@ namespace BackendOncologia.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MedicacaoPreQuimioDetalhe_Usuarios_cod_Usuario",
-                        column: x => x.codUsuario,
-                        principalTable: "Usuarios",
+                        name: "FK_MedicacaoPreQuimioDetalhe_Quimio_cod_Quimio",
+                        column: x => x.codQuimio,
+                        principalTable: "Quimio",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_MedicacaoPreQuimioDetalhe_ViaDeAdministracao_cod_Usuario",
-                        column: x => x.codUsuario,
+                        name: "FK_MedicacaoPreQuimioDetalhe_ViaDeAdministracao_cod_ViaDeAdministracao",
+                        column: x => x.codViaDeAdministracao,
                         principalTable: "ViaDeAdministracao",
                         principalColumn: "Id");
                 });
@@ -154,8 +167,7 @@ namespace BackendOncologia.Migrations
                     codMedicacao = table.Column<int>(name: "cod_Medicacao", type: "INT", nullable: false),
                     codPreQuimio = table.Column<int>(name: "cod_PreQuimio", type: "INT", nullable: false),
                     codViaDeAdministracao = table.Column<int>(name: "cod_ViaDeAdministracao", type: "INT", nullable: false),
-                    codUsuario = table.Column<int>(name: "cod_Usuario", type: "INT", nullable: false),
-                    medicacaoId = table.Column<int>(type: "int", nullable: false),
+                    nomeUsuario = table.Column<string>(name: "nome_Usuario", type: "VARCHAR(50)", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     status = table.Column<string>(type: "CHAR(1)", nullable: false),
                     dose = table.Column<int>(type: "INT", nullable: false),
@@ -174,8 +186,8 @@ namespace BackendOncologia.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Protocolos_Medicacao_medicacaoId",
-                        column: x => x.medicacaoId,
+                        name: "FK_Protocolos_Medicacao_cod_Medicacao",
+                        column: x => x.codMedicacao,
                         principalTable: "Medicacao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -185,11 +197,6 @@ namespace BackendOncologia.Migrations
                         principalTable: "PreQuimio",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Protocolos_Usuarios_cod_Usuario",
-                        column: x => x.codUsuario,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Protocolos_ViaDeAdministracao_cod_ViaDeAdministracao",
                         column: x => x.codViaDeAdministracao,
@@ -208,9 +215,14 @@ namespace BackendOncologia.Migrations
                 column: "cod_PreQuimio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicacaoPreQuimioDetalhe_cod_Usuario",
+                name: "IX_MedicacaoPreQuimioDetalhe_cod_Quimio",
                 table: "MedicacaoPreQuimioDetalhe",
-                column: "cod_Usuario");
+                column: "cod_Quimio");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicacaoPreQuimioDetalhe_cod_ViaDeAdministracao",
+                table: "MedicacaoPreQuimioDetalhe",
+                column: "cod_ViaDeAdministracao");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Protocolos_cod_DescricaoProtocolo",
@@ -218,24 +230,19 @@ namespace BackendOncologia.Migrations
                 column: "cod_DescricaoProtocolo");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Protocolos_cod_Medicacao",
+                table: "Protocolos",
+                column: "cod_Medicacao");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Protocolos_cod_PreQuimio",
                 table: "Protocolos",
                 column: "cod_PreQuimio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Protocolos_cod_Usuario",
-                table: "Protocolos",
-                column: "cod_Usuario");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Protocolos_cod_ViaDeAdministracao",
                 table: "Protocolos",
                 column: "cod_ViaDeAdministracao");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Protocolos_medicacaoId",
-                table: "Protocolos",
-                column: "medicacaoId");
         }
 
         /// <inheritdoc />
@@ -248,7 +255,13 @@ namespace BackendOncologia.Migrations
                 name: "Protocolos");
 
             migrationBuilder.DropTable(
+                name: "Usuarios");
+
+            migrationBuilder.DropTable(
                 name: "MedicacaoPreQuimio");
+
+            migrationBuilder.DropTable(
+                name: "Quimio");
 
             migrationBuilder.DropTable(
                 name: "DescricaoProtocolo");
@@ -258,9 +271,6 @@ namespace BackendOncologia.Migrations
 
             migrationBuilder.DropTable(
                 name: "PreQuimio");
-
-            migrationBuilder.DropTable(
-                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "ViaDeAdministracao");

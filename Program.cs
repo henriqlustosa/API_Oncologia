@@ -64,9 +64,11 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepositoryEF>();
 builder.Services.AddScoped<IMedicacaoPreQuimioRepository, MedicacaoPreQuimioRepositoryEF>();
+builder.Services.AddScoped<IMedicacaoRepository, MedicacaoRepositoryEF>();
 builder.Services.AddScoped<IViaDeAdministracaoRepository, ViaDeAdministracaoRepositoryEF>();
 builder.Services.AddScoped<ITipoPreQuimioRepository, TipoPreQuimioRepositoryEF>();
 builder.Services.AddScoped<IPreQuimioRepository, PreQuimioRepositoryEF>();
+builder.Services.AddScoped<IQuimioRepository, QuimioRepositoryEF>();
 builder.Services.AddScoped<IProtocolosRepository, ProtocolosRepositoryEF>();
 builder.Services.AddScoped<IDescricaoProtocoloRepository, DescricaoProtocoloRepositoryEF>();
 builder.Services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Scoped);

@@ -8,7 +8,7 @@ namespace BackendOncologia.Entities
         public string descricao { get; set; }
         public string status { get; set; }
 
-        public ICollection<MedicacaoPreQuimioDetalhe> preQuimios { get; set; }
+        public ICollection<MedicacaoPreQuimioDetalhe> medicacaoPreQuimioDetalhe { get; set; }
 
         public MedicacaoPreQuimio() { }
         public MedicacaoPreQuimio(AddMedicacaoPreQuimioDTO addMedicacaoPreQuimioDTO)

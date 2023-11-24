@@ -1,14 +1,14 @@
 ﻿using BackendOncologia.Entities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendOncologia.Configuration
 {
-    public class ViaDeAdministracaoConfiguration : IEntityTypeConfiguration<ViaDeAdministracao>
+    public class QuimioConfiguration : IEntityTypeConfiguration<Quimio>
     {
-        public void Configure(EntityTypeBuilder<ViaDeAdministracao> builder)
+        public void Configure(EntityTypeBuilder<Quimio> builder)
         {
-            builder.ToTable("ViaDeAdministracao");
+            builder.ToTable("Quimio");
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Id)
@@ -22,19 +22,16 @@ namespace BackendOncologia.Configuration
                 .HasColumnType("CHAR(1)")
                 .IsRequired();
 
-          
 
-          
+
+
             builder.HasMany(u => u.medicacaoPreQuimioDetalhe)
-                          .WithOne(o => o.viaDeAdministracao)
-                          .HasForeignKey(o => o.cod_ViaDeAdministracao)
+                          .WithOne(o => o.quimio)
+                          .HasForeignKey(o => o.cod_Quimio)
                           .OnDelete(DeleteBehavior.NoAction);
 
 
-            builder.HasMany(u => u.protocolos)
-                          .WithOne(o => o.viaDeAdministracao)
-                          .HasForeignKey(o => o.cod_ViaDeAdministracao)
-                          .OnDelete(DeleteBehavior.NoAction);
+            
 
         }
     }

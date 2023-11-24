@@ -33,7 +33,10 @@ namespace BackendOncologia.Configuration
 
             builder.Property(p => p.cod_ViaDeAdministracao)
           .HasColumnType("INT");
-         
+
+            builder.Property(p => p.nome_Usuario)
+               .HasColumnType("VARCHAR(50)")
+               .IsRequired();
 
             builder.Property(p => p.quantidade)
                 .HasColumnType("INT");
@@ -41,6 +44,7 @@ namespace BackendOncologia.Configuration
             builder.Property(p => p.unidadeQuantidade)
                 .HasColumnType("VARCHAR(10)")
                 .IsRequired();
+           
 
             builder.Property(p => p.diluicao)
                .HasColumnType("VARCHAR(50)")
@@ -63,13 +67,13 @@ namespace BackendOncologia.Configuration
                 .WithMany(p => p.medicacaoPreQuimioDetalhe)
                 .HasPrincipalKey(p => p.Id);
 
-            builder.HasOne(u => u.usuario)
+            //builder.HasOne(u => u.usuario)
+            //  .WithMany(p => p.medicacaoPreQuimioDetalhe)
+            //  .HasPrincipalKey(u => u.Id);
+
+
+            builder.HasOne(u => u.medicacaoPreQuimio)
               .WithMany(p => p.medicacaoPreQuimioDetalhe)
-              .HasPrincipalKey(u => u.Id);
-
-
-            builder.HasOne(u => u.medicacao)
-              .WithMany(p => p.preQuimios)
               .HasPrincipalKey(u => u.Id);
 
 

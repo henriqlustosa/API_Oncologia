@@ -10,10 +10,10 @@ namespace BackendOncologia.Entities
         public int cod_Medicacao { get; set; }
         public int cod_Quimio { get; set; }
         public int cod_ViaDeAdministracao { get; set; }
-        public int cod_Usuario { get; set; }
+        public string nome_Usuario { get; set; }
         public PreQuimio preQuimio { get; set; }
 
-        public MedicacaoPreQuimio medicacao { get; set; }
+        public MedicacaoPreQuimio medicacaoPreQuimio { get; set; }
         public int quantidade { get; set; }
 
         public string unidadeQuantidade { get; set; }
@@ -28,7 +28,7 @@ namespace BackendOncologia.Entities
 
         public DateTime dataCadastro { get; set; }
 
-        public Usuario usuario { get; set; }
+        //public Usuario usuario { get; set; }
         
         public string status {  get; set; }
        
@@ -39,7 +39,7 @@ namespace BackendOncologia.Entities
             this.cod_Medicacao = addTipoQuimioDTO.cod_Medicacao;
             this.cod_Quimio = addTipoQuimioDTO.cod_Quimio;
             this.cod_ViaDeAdministracao = addTipoQuimioDTO.cod_ViaDeAdministracao;
-            this.cod_Usuario = addTipoQuimioDTO.cod_Usuario;
+            this.nome_Usuario = addTipoQuimioDTO.nome_Usuario;
             this.quantidade = addTipoQuimioDTO.quantidade;
             this.unidadeQuantidade = addTipoQuimioDTO.unidadeQuantidade;
             this.diluicao = addTipoQuimioDTO.diluicao;
@@ -54,7 +54,7 @@ namespace BackendOncologia.Entities
             this.cod_Medicacao = updatePreQuimioDTO.cod_Medicacao;
             this.cod_Quimio = updatePreQuimioDTO.cod_Quimio;
             this.cod_ViaDeAdministracao = updatePreQuimioDTO.cod_ViaDeAdministracao;
-            this.cod_Usuario = updatePreQuimioDTO.cod_Usuario;
+            this.nome_Usuario = updatePreQuimioDTO.nome_Usuario;
             this.quantidade = updatePreQuimioDTO.quantidade;
             this.unidadeQuantidade = updatePreQuimioDTO.unidadeQuantidade;
             this.diluicao = updatePreQuimioDTO.diluicao;

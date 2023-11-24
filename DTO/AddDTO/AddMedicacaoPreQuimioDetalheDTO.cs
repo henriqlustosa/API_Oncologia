@@ -9,7 +9,7 @@ namespace BackendOncologia.DTO.AddDTO
         public int cod_Medicacao { get; set; }
         public int cod_Quimio { get; set; }
         public int cod_ViaDeAdministracao { get; set; }
-        public int cod_Usuario { get; set; }
+        public string nome_Usuario { get; set; }
 
         public int quantidade { get; set; }
 

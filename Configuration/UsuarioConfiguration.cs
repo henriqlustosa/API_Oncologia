@@ -32,15 +32,15 @@ namespace BackendOncologia.Configuration
                 .HasConversion<int>()
                 .IsRequired();
 
-            builder.HasMany(u => u.medicacaoPreQuimioDetalhe)
-                          .WithOne(o => o.usuario)
-                          .HasForeignKey(o => o.cod_Usuario)
-                          .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasMany(u => u.medicacaoPreQuimioDetalhe)
+            //              .WithOne(o => o.usuario)
+            //              .HasForeignKey(o => o.cod_Usuario)
+            //              .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasMany(u => u.protocolos)
-                          .WithOne(o => o.usuario)
-                          .HasForeignKey(o => o.cod_Usuario)
-                          .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasMany(u => u.protocolos)
+            //              .WithOne(o => o.usuario)
+            //              .HasForeignKey(o => o.cod_Usuario)
+            //              .OnDelete(DeleteBehavior.NoAction);
 
         }
     }

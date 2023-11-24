@@ -17,7 +17,7 @@ namespace BackendOncologia.Entities
             this.descricao = addMedicacaoDTO.descricao;
             this.status = "A";
         }
-        public Medicacao(UpdateMedicacoDTO updateMedicacaoDTO)
+        public Medicacao(UpdateMedicacaoDTO updateMedicacaoDTO)
         {
             this.descricao = updateMedicacaoDTO.descricao;
             this.status = updateMedicacaoDTO.status;
